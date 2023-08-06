@@ -1,0 +1,15 @@
+<h1>Add a new vegetable for today's stock</h1>
+<%= form_with scope: :vegetable, url: vegetables_path, method: :post do |f| %>
+<div>
+   <%= f.label "Name" %>
+   <%= f.text_field "name"%>
+ </div>
+ <div>
+   <%= f.label "Price" %>
+   <%= f.text_field "price"%>
+ </div>
+<div class="field">
+  <%= f.check_box :available, {}, true, false %>
+</div>
+ <%= f.submit "Add Vegetable" %>
+<% end %>

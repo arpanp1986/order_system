@@ -1,0 +1,23 @@
+<h1>Showing Vegetable</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Availabiity</th>
+      <th>QR Code</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td><%= @vegetable.name %></td>
+        <td><%= @vegetable.price %></td>
+          <%= image_tag(url_for(@vegetable&.qrcode)) %>
+      </tr>
+  </tbody>
+</table>
+
+<br>

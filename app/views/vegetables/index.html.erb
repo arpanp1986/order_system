@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+#customers td, #customers th {
+  border: 2px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: coral;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: blue;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+
+<h1>Listing Vegetables</h1>
+<div style="overflow-x: auto;">
+<table id=customers>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Availabiity</th>
+      <th>QR Code</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vegetables.each do |vegetable| %>
+      <tr>
+        <td><%= vegetable.name %></td>
+        <td><%= vegetable.price %></td>
+        <td><%= vegetable.available %></td>
+        <td><%= link_to "Show", vegetable %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
