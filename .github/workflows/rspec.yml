@@ -9,19 +9,56 @@ jobs:
   rspec:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: myapp_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 1s
+          --health-retries 5
+
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
     - name: Set up Ruby
-      uses: actions/setup-ruby@v2.1.3
+      uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
       with:
-        ruby-version: 3.2.2
+        ruby-version: 3.1.1
+
+    - name: Cache Ruby Gems
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/*.gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
 
     - name: Install Dependencies
       run: |
         gem install bundler
         bundle install --jobs 4 --retry 3
+
+    - name: Setup Database
+      env:
+        RAILS_ENV: test
+        DATABASE_NAME_TEST: myapp_test
+        POSTGRES_HOST: localhost
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_PORT: 5432
+        DATABASE_USER: postgres
+      run: |
+        bundle exec rails db:migrate
+        bundle exec rails db:seed
 
     - name: Determine Working Branch
       id: working_branch
@@ -29,12 +66,4 @@ jobs:
 
     - name: Run RSpec Tests
       run: |
-        # Extract branch name from GITHUB_REF
-        BRANCH=${GITHUB_REF##*/}
-
-        # Run RSpec tests based on the working branch
-        if [ "$BRANCH" = "main" ]; then
           bundle exec rspec
-        else
-          bundle exec rspec spec/$BRANCH
-        fi
