@@ -1,0 +1,40 @@
+name: RSpec Tests
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v2.1.3
+      with:
+        ruby-version: 3.2.2
+
+    - name: Install Dependencies
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+
+    - name: Determine Working Branch
+      id: working_branch
+      run: echo "BRANCH_NAME=$(echo $GITHUB_REF | awk -F/ '{print $3}')" >> $GITHUB_ENV
+
+    - name: Run RSpec Tests
+      run: |
+        # Extract branch name from GITHUB_REF
+        BRANCH=${GITHUB_REF##*/}
+
+        # Run RSpec tests based on the working branch
+        if [ "$BRANCH" = "main" ]; then
+          bundle exec rspec
+        else
+          bundle exec rspec spec/$BRANCH
+        fi
