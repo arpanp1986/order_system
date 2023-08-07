@@ -57,7 +57,8 @@ jobs:
         POSTGRES_PORT: 5432
         DATABASE_USER: postgres
       run: |
-        bundle exec rails db:migrate
+        bundle exec rails db:drop
+        bundle exec rails db:test:prepare
         bundle exec rails db:seed
 
     - name: Determine Working Branch
