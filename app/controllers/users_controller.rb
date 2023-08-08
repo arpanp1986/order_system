@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def index
     render json: User.all.to_json, status: :ok
@@ -25,7 +27,7 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     user.destroy!
-    render json: "User deleted successfully".to_json, ststus: :ok
+    render json: 'User deleted successfully'.to_json, ststus: :ok
   end
 
   private
@@ -36,7 +38,6 @@ class UsersController < ApplicationController
                                  :email,
                                  :phone_number,
                                  :registered,
-                                 :active
-                                )
+                                 :active)
   end
 end

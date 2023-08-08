@@ -1,0 +1,7 @@
+require: rubocop-rails
+
+Style/Documentation:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
