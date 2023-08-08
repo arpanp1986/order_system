@@ -1,16 +1,13 @@
+# frozen_string_literal: true
+
 class VegetablesController < ApplicationController
   def index
     render json: Vegetable.all.to_json, status: :ok
   end
 
-
   def show
     render json: Vegetable.find(params[:id]).to_json, status: :ok
   end
-
-  # def new
-  #   render json: Vegetable.new.to_json, status: :ok
-  # end
 
   def create
     vegetable = Vegetable.new(vegetable_params)
@@ -34,7 +31,7 @@ class VegetablesController < ApplicationController
   def destroy
     vegetable = Vegetable.find(params[:id])
     vegetable.destroy!
-    render json: "Vegetable deleted successfully".to_json, status: :ok
+    render json: 'Vegetable deleted successfully'.to_json, status: :ok
   end
 
   private

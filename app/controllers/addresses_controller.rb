@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddressesController < ApplicationController
   def index
     render json: Address.all.to_json, status: :ok
@@ -25,7 +27,7 @@ class AddressesController < ApplicationController
   def destroy
     address = Address.find(params[:id])
     address.destroy!
-    render json: "Address deleted successfully".to_json, ststus: :ok
+    render json: 'Address deleted successfully'.to_json, ststus: :ok
   end
 
   private
@@ -37,7 +39,6 @@ class AddressesController < ApplicationController
                                     :address_type_id,
                                     :zip_code,
                                     :user_id,
-                                    :country
-                                   )
+                                    :country)
   end
 end
