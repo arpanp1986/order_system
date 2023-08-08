@@ -34,7 +34,7 @@ class VegetablesController < ApplicationController
   def destroy
     vegetable = Vegetable.find(params[:id])
     vegetable.destroy!
-    render json: "Address deleted successfully".to_json, status: :ok
+    render json: "Vegetable deleted successfully".to_json, status: :ok
   end
 
   private

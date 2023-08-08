@@ -54,7 +54,7 @@ RSpec.describe AddressesController do
   end
 
   context '#update' do
-    it 'updates a vegetable successfully' do
+    it 'updates an address successfully' do
       address = FactoryBot.create(:address, address_1: "Original address_1")
 
       put :update, params: { id: address.id, address: { address_1: "Updated address_1" } }
@@ -65,7 +65,7 @@ RSpec.describe AddressesController do
   end
 
   context '#destroy' do
-    it 'delets a vegetable successfully' do
+    it 'delets an address successfully' do
       address = FactoryBot.create(:address)
 
       delete :destroy, params: { id: address.id }
