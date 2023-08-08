@@ -63,7 +63,7 @@ RSpec.describe VegetablesController do
       delete :destroy, params: { id: vegetable.id }
 
       expect(response.status).to eq (200)
-      expect(JSON.parse(response.body)).to eq("Record deleted successfully")
+      expect(JSON.parse(response.body)).to eq("Vegetable deleted successfully")
       expect{ vegetable.reload }.to raise_error("Couldn't find Vegetable with 'id'=#{vegetable.id}")
     end
   end

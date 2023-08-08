@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   # delete 'vegetables/:id', to: 'vegetables#destroy'
 
   resources :vegetables
+  # get 'addresses', to: 'addresses#index'
+
+  resources :addresses
+  resources :users
 end
