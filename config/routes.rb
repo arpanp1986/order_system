@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   # get 'addresses', to: 'addresses#index'
 
   resources :addresses
-  resources :users
+  resources :customers
 end

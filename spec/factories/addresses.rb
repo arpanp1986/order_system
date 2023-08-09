@@ -2,7 +2,7 @@ require 'faker'
 
 FactoryBot.define do
   factory :address do
-    user { FactoryBot.create(:user) }
+    customer { FactoryBot.create(:customer) }
     address_1 { Faker::Address.street_name}
     state { Faker::Address.state }
     zip_code { Faker::Address.zip_code.delete("-")}

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class User < ApplicationRecord
+class Customer < ApplicationRecord
   include ActiveModel::Validations
   validates :email, presence: true, email: true
   validates :first_name, presence: true

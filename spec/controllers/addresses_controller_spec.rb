@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe AddressesController do
-
-
   context '#index' do
     before do
       allow(AddressType).to receive(:find).and_return(double("AddressType"))
@@ -30,7 +28,7 @@ RSpec.describe AddressesController do
   context '#create' do
     before do
       allow(AddressType).to receive(:find).and_return(double("AddressType"))
-      allow(User).to receive(:find).and_return(double("User"))
+      allow(Customer).to receive(:find).and_return(double("Customer"))
     end
     it 'shows error message if required params are missing' do
       expect{post(:create, params: { })}.to raise_error(ActionController::ParameterMissing, /param is missing or the value is empty: address/)
@@ -43,10 +41,10 @@ RSpec.describe AddressesController do
     end
 
     it 'create an addres' do
-      user = FactoryBot.create(:user)
+      customer = FactoryBot.create(:customer)
       address_type = AddressType.create(name: "Some address type")
 
-      post :create, params: { address: { address_1: "New home", address_2: "north", state: "IL", zip_code: 60444, user_id: user.id, address_type_id: address_type.id, country: "US"} }
+      post :create, params: { address: { address_1: "New home", address_2: "north", state: "IL", zip_code: 60444, customer_id: customer.id, address_type_id: address_type.id, country: "US"} }
 
       expect(response.status).to eql(201)
       expect(JSON.parse(response.body)["address_1"]).to eql("New home")
