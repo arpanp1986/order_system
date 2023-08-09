@@ -12,5 +12,6 @@ class ChangeTableName < ActiveRecord::Migration[7.0]
     end
     add_reference :addresses, :customer, foreign_key: true
     remove_column :addresses, :user_id, :integer
+    add_index :customers, :email, unique: true
   end
 end

@@ -71,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_09_111349) do
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_customers_on_email", unique: true
   end
 
   create_table "users", force: :cascade do |t|

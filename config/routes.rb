@@ -15,4 +15,5 @@ Rails.application.routes.draw do
 
   resources :addresses
   resources :customers
+  post 'customers/create_customer_and_address_by_customer_obj', to: 'customers#create_customer_and_address_by_customer_obj'
 end
