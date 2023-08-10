@@ -38,7 +38,7 @@ class AddressesController < ApplicationController
                                     :state,
                                     :address_type_id,
                                     :zip_code,
-                                    :user_id,
+                                    :customer_id,
                                     :country)
   end
 end

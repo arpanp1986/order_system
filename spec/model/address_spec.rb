@@ -8,7 +8,7 @@ RSpec.describe Address do
 
   describe 'validates attributes of address' do
     it 'validates presence of address 1' do
-      expect{ FactoryBot.create(:address, user: FactoryBot.create(:user), address_1: nil) }.to raise_error(ActiveRecord::RecordInvalid, /Validation failed: Address 1 can't be blank/)
+      expect{ FactoryBot.create(:address, customer: FactoryBot.create(:customer), address_1: nil) }.to raise_error(ActiveRecord::RecordInvalid, /Validation failed: Address 1 can't be blank/)
     end
 
     it 'validates presence of state' do
