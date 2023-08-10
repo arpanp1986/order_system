@@ -9,6 +9,10 @@ class Customer < ApplicationRecord
   has_many :addresses, dependent: :destroy
 
   def add_address(attrs)
-    Address.create(attrs)
+    begin
+      Address.create!(attrs)
+    rescue  ActiveRecord::RecordInvalid => e
+      raise e
+    end
   end
 end
