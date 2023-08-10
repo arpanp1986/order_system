@@ -1,3 +1,0 @@
-#!/usr/bin/env ruby
-require 'parallel_rspec'
-ParallelRSpec::Runner.invoke
