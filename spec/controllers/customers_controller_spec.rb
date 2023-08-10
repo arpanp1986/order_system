@@ -1,6 +1,62 @@
 require 'rails_helper'
 
 RSpec.describe CustomersController do
+
+  let(:customer_and_address_params) do {
+      customer: {
+        first_name: "foo",
+        last_name: "bar",
+        email: "abce@mails17.com",
+        phone_number: "222-345-3454",
+        active: true,
+        address: {
+          address_1: "New homw",
+          address_2: "north",
+          state: "IL",
+          zip_code: 60444,
+          address_type_id: AddressType.create(name: "shipping").id,
+          country: "US"
+        }
+      }
+    }
+  end
+
+  let(:customer_with_missing_first_name_and_address_params) do {
+      customer: {
+        last_name: "bar",
+        email: "abce@mails17.com",
+        phone_number: "222-345-3454",
+        active: true,
+        address: {
+          address_1: "New homw",
+          address_2: "north",
+          state: "IL",
+          zip_code: 60444,
+          address_type_id: AddressType.create(name: "shipping").id,
+          country: "US"
+        }
+      }
+    }
+  end
+
+  let(:customer_and_address_with_missing_state_params) do {
+      customer: {
+        first_name: "foo",
+        last_name: "bar",
+        email: "abce@mails17.com",
+        phone_number: "222-345-3454",
+        active: true,
+        address: {
+          address_1: "New homw",
+          address_2: "north",
+          zip_code: 60444,
+          address_type_id: AddressType.create(name: "shipping").id,
+          country: "US"
+        }
+      }
+    }
+  end
+
   context '#index' do
     it 'displays all customers' do
       FactoryBot.create(:customer)
@@ -61,6 +117,28 @@ RSpec.describe CustomersController do
       expect(response.status).to eq (200)
       expect(JSON.parse(response.body)).to eq("Customer deleted successfully")
       expect{ customer.reload }.to raise_error("Couldn't find Customer with 'id'=#{customer.id}")
+    end
+  end
+
+  context '#create_customer_and_address_by_customer_obj' do
+    it "doen't save customer if there is any required param is missing from customer" do
+      post :create_customer_and_address_by_customer_obj, params: customer_with_missing_first_name_and_address_params
+
+      expect(response.status).to eq (422)
+      expect(JSON.parse(response.body)).to eq("Validation failed: First name can't be blank")
+    end
+
+    it "doen't save customer if there is any required param is missing from address" do
+      post :create_customer_and_address_by_customer_obj, params: customer_and_address_with_missing_state_params
+
+      expect(response.status).to eq (422)
+      expect(JSON.parse(response.body)).to eq("Validation failed: State can't be blank")
+    end
+
+    it "saves customer successfully" do
+      post :create_customer_and_address_by_customer_obj, params: customer_and_address_params
+
+      expect(response.status).to eq (201)
     end
   end
 end

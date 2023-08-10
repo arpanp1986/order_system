@@ -59,6 +59,7 @@ gem 'faker', '~> 3.2'
 gem 'rqrcode', '~> 2.0'
 gem 'webpacker', '~> 3'
 gem 'rubocop-rails', require: false
+gem 'parallel_rspec'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

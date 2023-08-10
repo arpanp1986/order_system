@@ -41,11 +41,15 @@ class CustomersController < ApplicationController
 
 
   def create_customer_and_address_by_customer_obj
-    customer = Customer.create(customer_params)
-  # write if else condition to handle failure on customer creation
-
-    customer.add_address(address(address_params, customer))
-    render json: customer_and_address_params_presenter(customer).to_json, status: :created
+    begin
+      ActiveRecord::Base.transaction do
+        @customer = Customer.create!(customer_params)
+        @customer.add_address(address(address_params, @customer))
+      end
+      render json: customer_and_address_params_presenter(@customer).to_json, status: :created
+    rescue ActiveRecord::RecordInvalid => e
+      render json: e.message.to_json, status: :unprocessable_entity
+    end
   end
 
   private
@@ -55,8 +59,7 @@ class CustomersController < ApplicationController
   end
 
   def address_params
-    params.require(:customer).require(:address).permit(:address_1, :address_2, :state, :address_type_id, :zip_code, :country, :customer_id)
-    #need to do .permit
+    params.require(:customer).require(:address).permit(:address_1, :address_2, :state, :address_type_id, :zip_code, :country)
   end
 
   def address(address_params, customer)
@@ -76,6 +79,5 @@ class CustomersController < ApplicationController
       customer: customer,
       addresses: customer.addresses
     }
-
   end
 end
