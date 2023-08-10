@@ -47,7 +47,7 @@ class CustomersController < ApplicationController
         @customer.add_address(address(address_params, @customer))
       end
       render json: customer_and_address_params_presenter(@customer).to_json, status: :created
-    rescue ActiveRecord::RecordInvalid => e
+    rescue => e
       render json: e.message.to_json, status: :unprocessable_entity
     end
   end
