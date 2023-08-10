@@ -45,7 +45,7 @@ jobs:
     - name: Install Dependencies
       run: |
         gem install bundler
-        bundle install --deployment --jobs 4 --retry 3
+        bundle install --jobs 4 --retry 3
 
     - name: Setup Database
       env:
