@@ -1,0 +1,17 @@
+current directory: /Users/apatel/Desktop/myapp/vendor/bundle/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+/Users/apatel/.rbenv/versions/3.1.1/bin/ruby -I /Users/apatel/.rbenv/versions/3.1.1/lib/ruby/3.1.0 -r ./siteconf20230810-89886-j0ur8x.rb extconf.rb
+creating Makefile
+
+current directory: /Users/apatel/Desktop/myapp/vendor/bundle/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= clean
+
+current directory: /Users/apatel/Desktop/myapp/vendor/bundle/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\=
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/apatel/Desktop/myapp/vendor/bundle/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 debug.bundle ./.gem.20230810-89886-evv155/debug

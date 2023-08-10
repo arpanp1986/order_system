@@ -158,6 +158,9 @@ GEM
       activerecord (>= 6.0)
       request_store (~> 1.4)
     parallel (1.23.0)
+    parallel_rspec (2.4.1)
+      rake (> 10.0)
+      rspec
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
@@ -214,6 +217,10 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
+    rspec (3.12.0)
+      rspec-core (~> 3.12.0)
+      rspec-expectations (~> 3.12.0)
+      rspec-mocks (~> 3.12.0)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.3)
@@ -327,6 +334,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   paper_trail
+  parallel_rspec
   pg (~> 1.1)
   psych (< 4)
   puma (~> 5.0)
