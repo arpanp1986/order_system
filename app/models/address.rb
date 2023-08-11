@@ -9,5 +9,7 @@ class Address < ApplicationRecord
 
   belongs_to :customer
   belongs_to :address_type
+
+  scope :billing, -> { where(address_type: AddressType.find_by(name: "billing")) }
   has_paper_trail
 end
