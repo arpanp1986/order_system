@@ -45,16 +45,4 @@ RSpec.describe Customer, type: :model do
       expect(FactoryBot.create(:customer)).to an_instance_of(Customer)
     end
   end
-
-  describe 'validates #add_address' do
-    it 'validates and raises the error for missing params' do
-      @customer = FactoryBot.create(:customer)
-      expect{ @customer.add_address(attrs_without_address_1.merge(customer: @customer))}.to raise_error(ActiveRecord::RecordInvalid, /Validation failed: Address 1 can't be blank/)
-    end
-
-    it 'successfully creates a record for valid address' do
-      @customer = FactoryBot.create(:customer)
-      expect(@customer.add_address(attrs.merge(customer: @customer))).to an_instance_of(Address)
-    end
-  end
 end

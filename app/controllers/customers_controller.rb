@@ -44,10 +44,10 @@ class CustomersController < ApplicationController
     begin
       ActiveRecord::Base.transaction do
         @customer = Customer.create!(customer_params)
-        @customer.add_address(address(address_params, @customer))
+        @customer.addresses.create!(address_params)
       end
       render json: customer_and_address_params_presenter(@customer).to_json, status: :created
-    rescue ActiveRecord::RecordInvalid => e
+    rescue => e
       render json: e.message.to_json, status: :unprocessable_entity
     end
   end
@@ -68,6 +68,7 @@ class CustomersController < ApplicationController
       address_2: address_params[:address_2],
       state: address_params[:state],
       zip_code: address_params[:zip_code],
+      address_type_id: address_params[:address_type_id],
       address_type_id: address_params[:address_type_id],
       country: address_params[:country],
       customer: customer
